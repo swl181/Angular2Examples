@@ -40,5 +40,39 @@ namespace WebApplicationBasic.Controllers
                 }
             }
         }
+		
+		[HttpGet("[action]")]
+        public DomNode DomNodes()
+        {
+            var node = new DomNode()
+            {
+                tag = "div",
+                content =
+                                    new List<DomNode>()
+                                        {
+                                            new DomNode()
+                                                {
+                                                    tag = "span",
+                                                    attributes = new Dictionary<string, string>() { { "style", "color: red" } },
+                                                    content = new List<DomNode>() {new DomNode() {text = "Enter value:" } }
+                                                },
+                                            new DomNode()
+                                                {
+                                                    tag = "input",
+                                                    attributes = new Dictionary<string, string>() { { "type", "text" }, { "value", "test" }, { "style", "color: green" } }
+                                                }
+                                        }
+            };
+            return node;
+        }
+
+        public class DomNode
+        {
+            public string tag { get; set; }
+            public string text { get; set; }
+            public Dictionary<string, string> attributes { get; set; }
+            public List<DomNode> content { get; set; }
+        }
+
     }
 }

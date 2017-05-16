@@ -14,9 +14,12 @@
   <ItemGroup>
     <!-- Files not to show in IDE -->
     <None Remove="yarn.lock" />
+    <Compile Remove="ClientApp\app\components\Новая папка\**" />
 
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
+    <EmbeddedResource Remove="ClientApp\app\components\Новая папка\**" />
+    <None Remove="ClientApp\app\components\Новая папка\**" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
