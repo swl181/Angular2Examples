@@ -1,0 +1,13 @@
+﻿<h1>Файловый менеджер</h1>
+
+Необходимо реализовать дерево файлов. Базовый принцип работы идентичен навигации по каталогам в проводнике Windows. Источником данных выступает json-структура.
+
+
+<div class="row">
+    <div class="col-md-3">
+        <treeview [treenodes]="treenode" (onRequestNodes)="onRequestNodes($event)" (onSelectNode)="onSelectNode($event)"></treeview>
+    </div>
+    <div class="col-md-9">
+        <listview [nodes]="listnode"></listview>
+    </div>
+</div>

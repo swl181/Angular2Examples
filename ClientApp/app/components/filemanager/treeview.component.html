@@ -1,0 +1,19 @@
+﻿<ul class="treenodes">
+    <li *ngFor="let node of treenodes | callback: getFolders" class="treenode">
+        <i *ngIf="!node.isLeaf" class="nodebutton glyphicon glyphicon-folder-{{node.isExpanded ? 'open' : 'close'}}" (click)="onExpand(node)"></i>
+        <i *ngIf="node.isLeaf" class="nodebutton glyphicon glyphicon-file"></i>
+        <div class="nodeinfo">
+            <span class="nodetext {{selectedNode == node ? 'bg-info' : ''}}" (click)="onSelectNodeLocal(node)">{{node.label}}</span>
+
+            <treeview [treenodes]="node.children" 
+                      [selectedNode]="selectedNode" 
+                      (onRequestNodes)="onRequestLocal($event)" 
+                      (onSelectNode)="onSelectNodeLocal($event)"
+                      *ngIf="node.isExpanded">
+
+            </treeview>
+
+        </div>      
+        
+    </li>
+</ul>

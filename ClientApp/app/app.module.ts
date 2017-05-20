@@ -8,12 +8,17 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { DynamicLoaderComponent } from './components/dynamicloader/dynamicloader.component';
 import { MacAddressComponent } from './components/macaddress/macaddress.component';
+import { FilemanagerComponent } from './components/filemanager/filemanager.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { MyDirectives } from "./directives/directives.module"
-
 import { COMPILER_PROVIDERS } from '@angular/compiler';
 import { DynamicModule } from './components/dynamic/dynamic.module';
 
+import { FilesLoaderService } from './components/filemanager/fileloader.service'
+import { TreeViewComponent } from './components/filemanager/treeview.component'
+import { ListViewComponent } from './components/filemanager/listview.component'
+
+import { CallbackPipe } from './shared/callback.pipe'
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -24,7 +29,11 @@ import { DynamicModule } from './components/dynamic/dynamic.module';
         FetchDataComponent,
         HomeComponent, 
         MacAddressComponent,
-        DynamicLoaderComponent
+        DynamicLoaderComponent,
+        FilemanagerComponent,
+        TreeViewComponent,
+        ListViewComponent,
+        CallbackPipe
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -34,6 +43,7 @@ import { DynamicModule } from './components/dynamic/dynamic.module';
             { path: 'home', component: HomeComponent },
             { path: 'macaddress', component: MacAddressComponent },
             { path: 'dynamicloadingcomponent', component: DynamicLoaderComponent },
+            { path: 'filemanagercomponent', component: FilemanagerComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
@@ -42,7 +52,8 @@ import { DynamicModule } from './components/dynamic/dynamic.module';
         DynamicModule.forRoot(),
     ],
     providers: [
-        COMPILER_PROVIDERS // this is an app singleton declaration
+        COMPILER_PROVIDERS, // this is an app singleton declaration
+        FilesLoaderService
     ],
 })
 export class AppModule {

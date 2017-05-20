@@ -40,8 +40,16 @@ namespace WebApplicationBasic.Controllers
                 }
             }
         }
-		
-		[HttpGet("[action]")]
+
+        public class DomNode
+        {
+            public string tag { get; set; }
+            public string text { get; set; }
+            public Dictionary<string, string> attributes { get; set; }
+            public List<DomNode> content { get; set; }
+        }
+
+        [HttpGet("[action]")]
         public DomNode DomNodes()
         {
             var node = new DomNode()
@@ -66,13 +74,57 @@ namespace WebApplicationBasic.Controllers
             return node;
         }
 
-        public class DomNode
+        public class TreeNode
         {
-            public string tag { get; set; }
-            public string text { get; set; }
-            public Dictionary<string, string> attributes { get; set; }
-            public List<DomNode> content { get; set; }
+            public long id { get; set; }
+            public string label { get; set; }
+            public bool isLeaf { get; set; }
+            public List<TreeNode> children { get; set; }
         }
 
+        [HttpGet("[action]")]
+        public TreeNode[] Files(long? id)
+        {
+            //TreeNode[] nodes = new TreeNode[] {
+            //    new TreeNode() {
+            //        label = "node1",
+            //        isLeaf =false,
+            //        children = new List<TreeNode>() {
+            //            new TreeNode() {
+            //                label = "node1.1",
+            //                isLeaf =true
+            //            },
+            //            new TreeNode() {
+            //                label = "node1.2",
+            //                isLeaf =true
+            //            }
+            //        }
+            //    },
+            //    new TreeNode()
+            //    {
+            //        label = "node2",
+            //        isLeaf = true
+            //    }
+            //};
+
+            var nodes = new List<TreeNode>();
+
+            Random random = new Random();
+
+            var boolRnd = new Random();
+
+            for (int n = 0; n< random.Next(2, 15); n++ )
+            {
+                
+
+                nodes.Add(new TreeNode()
+                {
+                    label = "node" + n.ToString(),
+                    isLeaf = boolRnd.Next(100) < 20
+                });
+            }
+
+            return nodes.ToArray();
+        }
     }
 }

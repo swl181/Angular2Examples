@@ -1,0 +1,10 @@
+﻿<ul>
+    <li *ngFor="let node of nodes">
+        <i *ngIf="!node.isLeaf" class="nodebutton glyphicon glyphicon-folder-close" (click)="onExpand(node)"></i>
+        <i *ngIf="node.isLeaf" class="nodebutton glyphicon glyphicon-file"></i>
+
+        {{node.label}}
+    </li>
+
+    
+</ul>
